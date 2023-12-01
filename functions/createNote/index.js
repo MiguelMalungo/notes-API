@@ -14,7 +14,7 @@ const createNote = async (event) => {
     const noteId = `${new Date().getTime()}`; // Generate ID based on the current timestamp
 
     const params = {
-        TableName: process.env.NOTES_TABLE,
+        TableName: 'UserNotes',
         Item: {
             id: noteId,
             title: title.substring(0, 50), // Ensure title is within the character limit
@@ -26,7 +26,8 @@ const createNote = async (event) => {
 
     try {
         await dynamoDb.put(params).promise();
-        return response(200, { message: 'Note saved successfully', note: params.Item });
+        //return response(200, { message: 'Note saved successfully', note: params.Item });
+        return { message: 'Success'};
     } catch (error) {
         console.error(error);
         return response(500, { message: 'Could not save the note' });

@@ -3,14 +3,14 @@ const bcrypt = require('bcryptjs');
 const response = require('../../responses'); // Adjust the path according to your project structure
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
-const USERS_TABLE = process.env.USERS_TABLE;
+const USERS_TABLE = 'Users';
 
 const signup = async (event) => {
     const { username, password } = JSON.parse(event.body);
 
     // Check if the user already exists
     const existingUser = await dynamoDb.get({
-        TableName: USERS_TABLE,
+        TableName: 'Users',
         Key: { username },
     }).promise();
 
@@ -28,11 +28,11 @@ const signup = async (event) => {
     };
 
     await dynamoDb.put({
-        TableName: USERS_TABLE,
+        TableName: 'Users',
         Item: newUser,
     }).promise();
 
-    return response(201, { message: 'User created successfully', username });
+    return { message: 'Success'};
 };
 
 module.exports.handler = signup;

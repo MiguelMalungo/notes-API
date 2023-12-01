@@ -4,16 +4,16 @@ const response = require('../../responses');
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 const getNotes = async (event) => {
-    const { userId } = event.queryStringParameters;
+    const { username } = event.queryStringParameters;
 
-    if (!userId) {
-        return response(400, { message: 'userId is required' });
+    if (!username) {
+        return response(400, { message: 'username is required' });
     }
 
     const params = {
-        TableName: process.env.NOTES_TABLE,
-        FilterExpression: 'userId = :userId',
-        ExpressionAttributeValues: { ':userId': userId },
+        TableName: 'UserNotes',
+        FilterExpression: 'username = :username',
+        ExpressionAttributeValues: { ':username': username },
     };
 
     try {

@@ -10,7 +10,7 @@ provider:
   profile: ${env:AWS_PROFILE}
   region: eu-north-1
   iam:
-    role: arn:aws:iam::213613991334:role/ServerlessLambdaRole
+    role: arn:aws:iam::213613991334:role/notes
   lambdaHashingVersion: 20201221
   
 

@@ -11,13 +11,13 @@ const deleteNote = async (event) => {
     }
 
     const params = {
-        TableName: process.env.NOTES_TABLE,
+        TableName: 'UserNotes',
         Key: { id },
     };
 
     try {
         await dynamoDb.delete(params).promise();
-        return response(200, { message: 'Note deleted successfully', id: id });
+        return { message: 'Success'};
     } catch (error) {
         console.error(error);
         return response(500, { message: 'Could not delete the note' });
